@@ -1,0 +1,19 @@
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="green_700">#388E3C</color>
+    <color name="green_500">#4CAF50</color>
+    <color name="green_200">#A5D6A7</color>
+    <color name="green_900">#1B5E20</color> <!-- Tambahkan warna ini -->
+    <color name="green_400">#66BB6A</color> <!-- Tambahkan warna ini -->
+
+    <!-- Tambahkan warna baru -->
+    <color name="colorPrimary">#FF6200EE</color> <!-- Warna utama, bisa disesuaikan -->
+    <color name="colorPrimaryDark">#FF3700B3</color> <!-- Warna gelap utama -->
+    <color name="colorAccent">#FF03DAC5</color> <!-- Warna aksen -->
+</resources>
