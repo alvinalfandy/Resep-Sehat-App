@@ -1,41 +1,49 @@
 package com.example.resepsehat;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.SearchView;
+import android.view.View; // Tambahkan impor ini
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private SearchView searchView;
+    private EditText searchInput;
+    private Button searchButton;
+    private TextView searchResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search); // Pastikan ini sesuai dengan XML layout
+        setContentView(R.layout.activity_search);
 
         // Inisialisasi komponen UI
-        searchView = findViewById(R.id.search_view);
+        searchInput = findViewById(R.id.search_input);
+        searchButton = findViewById(R.id.search_button);
+        searchResults = findViewById(R.id.search_results);
 
-        // Mengatur listener untuk SearchView
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // Menampilkan hasil pencarian
-                if (!query.isEmpty()) {
-                    Toast.makeText(SearchActivity.this, "Mencari: " + query, Toast.LENGTH_SHORT).show();
-                    Log.d("SearchActivity", "Pencarian dilakukan untuk: " + query);
+        // Set listener untuk tombol cari
+        searchButton.setOnClickListener(v -> {
+            String query = searchInput.getText().toString();
+            if (!query.isEmpty()) {
+                List<Recipe> results = new RecipeManager(this).searchRecipes(query);
+                if (results.isEmpty()) {
+                    searchResults.setText("Tidak ada hasil ditemukan.");
                 } else {
-                    Toast.makeText(SearchActivity.this, "Masukkan kata kunci pencarian!", Toast.LENGTH_SHORT).show();
+                    StringBuilder resultText = new StringBuilder();
+                    for (Recipe recipe : results) {
+                        resultText.append(recipe.getName()).append("\n");
+                    }
+                    searchResults.setText(resultText.toString());
                 }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // Digunakan saat teks dalam SearchView berubah
-                return false;
+                searchResults.setVisibility(View.VISIBLE);
+            } else {
+                Toast.makeText(this, "Masukkan kata kunci pencarian!", Toast.LENGTH_SHORT).show();
             }
         });
     }
